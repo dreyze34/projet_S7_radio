@@ -3,6 +3,7 @@ import numpy as np
 from skimage import io
 from matplotlib.colors import ListedColormap
 import matplotlib.cm as cm
+import torch
 
 class ThoraxDataLoader:
     """
@@ -24,7 +25,7 @@ class ThoraxDataLoader:
                                bottom(np.linspace(1, 0, 960))))
         self.newcmp = ListedColormap(newcolors, name='MonteCarlo')
 
-    def load_all_samples(self) -> np.ndarray:
+    def load_all_samples(self, type) -> np.ndarray:
         """
         Parcourt les dossiers des échantillons, charge les fichiers et les empile dans un tableau 3D.
         
@@ -36,7 +37,7 @@ class ThoraxDataLoader:
             sample_path = os.path.join(self.base_dir, sample_dir)
 
             if os.path.isdir(sample_path):  # Vérifie si c'est un dossier
-                sample_data = self._load_sample(sample_path)
+                sample_data = self._load_sample(sample_path, type)
                 if sample_data is not None:
                     all_samples.append(sample_data)
                     print(f"{sample_dir} chargé avec succès.")
@@ -53,9 +54,9 @@ class ThoraxDataLoader:
             self.data = np.array([])
 
         print(f"Total {len(all_samples)} échantillons chargés.")
-        return self.data
+        return torch.from_numpy(self.data)
 
-    def _load_sample(self, sample_path: str) -> np.ndarray:
+    def _load_sample(self, sample_path: str, type) -> np.ndarray:
         """
         Charge les fichiers nécessaires pour un échantillon donné.
         
@@ -75,7 +76,7 @@ class ThoraxDataLoader:
                 return None
 
             # Charger uniquement le fichier nécessaire (par ex. "HS")
-            sample_array = io.imread(files["HS"], plugin='simpleitk')
+            sample_array = io.imread(files[type], plugin='simpleitk')
 
             # Vérifier les dimensions
             if sample_array.shape == (64, 64):
