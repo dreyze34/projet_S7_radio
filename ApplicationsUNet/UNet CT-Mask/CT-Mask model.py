@@ -12,4 +12,4 @@ y_train = y_dataset[:train_lenght,:,:]
 x_test = x_dataset[train_lenght:,:,:]
 y_test = y_dataset[train_lenght:,:,:]
 
-print(x_train.size(), x_test.size())
+print(x_train[0])
