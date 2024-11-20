@@ -87,15 +87,3 @@ class ThoraxDataLoader:
         except Exception as e:
             print(f"Erreur lors du chargement de l'échantillon dans {sample_path}: {e}")
             return None
-
-
-# # Exemple d'utilisation
-# if __name__ == "__main__":
-#     loader = ThoraxDataLoader("./Data/Data_Medical/MCsimulations")
-#     all_data = loader.load_all_samples()
-
-#     # Vérifier les dimensions finales
-#     if all_data.size > 0:
-#         print(f"Données finales : {all_data.shape}")  # Ex : (sample_number, 64, 64)
-#     else:
-#         print("Aucune donnée n'a été chargée.")
