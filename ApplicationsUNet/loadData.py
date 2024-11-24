@@ -3,6 +3,7 @@ import numpy as np
 from skimage import io
 from matplotlib.colors import ListedColormap
 import matplotlib.cm as cm
+from matplotlib.colors import Normalize
 import torch
 
 class ThoraxDataLoader:
@@ -33,11 +34,15 @@ class ThoraxDataLoader:
         """
         all_samples = []
 
+        norm = Normalize(vmin=0, vmax=1)
+        newcmp = self.newcmp
+
         for sample_dir in os.listdir(self.base_dir):
             sample_path = os.path.join(self.base_dir, sample_dir)
 
             if os.path.isdir(sample_path):  # Vérifie si c'est un dossier
                 sample_data = self._load_sample(sample_path, type)
+                sample_data = cm.ScalarMappable(norm=norm, cmap=newcmp).to_rgba(sample_data)[:, :, :3]
                 if sample_data is not None:
                     all_samples.append(sample_data)
                     print(f"{sample_dir} chargé avec succès.")
