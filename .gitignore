@@ -2,3 +2,4 @@ PriseEnMainUnet/data/
 Data/
 .venv/
 ApplicationsUNet/UNet LS-HS/models
+ApplicationsUNet/UNet LS+CT-HS/models

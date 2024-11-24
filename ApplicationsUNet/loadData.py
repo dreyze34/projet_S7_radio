@@ -34,15 +34,12 @@ class ThoraxDataLoader:
         """
         all_samples = []
 
-        norm = Normalize(vmin=0, vmax=1)
-        newcmp = self.newcmp
-
         for sample_dir in os.listdir(self.base_dir):
             sample_path = os.path.join(self.base_dir, sample_dir)
 
             if os.path.isdir(sample_path):  # Vérifie si c'est un dossier
                 sample_data = self._load_sample(sample_path, type)
-                sample_data = cm.ScalarMappable(norm=norm, cmap=newcmp).to_rgba(sample_data)[:, :, :3]
+
                 if sample_data is not None:
                     all_samples.append(sample_data)
                     print(f"{sample_dir} chargé avec succès.")
@@ -66,6 +63,9 @@ class ThoraxDataLoader:
         :param sample_path: Chemin du répertoire d'un échantillon.
         :return: Tableau numpy 2D (64, 64) représentant l'échantillon ou None si incomplet.
         """
+        norm = Normalize(vmin=0, vmax=1)
+        newcmp = self.newcmp
+
         try:
             files = {
                 "LS": os.path.join(sample_path, "low_edep.mhd"),
@@ -80,9 +80,11 @@ class ThoraxDataLoader:
 
             # Charger uniquement le fichier nécessaire (par ex. "HS")
             sample_array = io.imread(files[type], plugin='simpleitk')
+            if type == "LS" or type == "HS":
+                sample_array = cm.ScalarMappable(norm=norm, cmap=newcmp).to_rgba(sample_array)[:, :, :3]
 
             # Vérifier les dimensions
-            if sample_array.shape == (64, 64):
+            if (sample_array.shape == (64, 64) and type in ["MaskCT", "CT"]) or (sample_array.shape == (64, 64, 3) and type in ["LS", "HS"]):
                 return sample_array
             else:
                 print(f"Dimensions invalides dans {sample_path}: {sample_array.shape}")
