@@ -80,11 +80,9 @@ class ThoraxDataLoader:
 
             # Charger uniquement le fichier nécessaire (par ex. "HS")
             sample_array = io.imread(files[type], plugin='simpleitk')
-            if type == "LS" or type == "HS":
-                sample_array = cm.ScalarMappable(norm=norm, cmap=newcmp).to_rgba(sample_array)[:, :, :3]
 
             # Vérifier les dimensions
-            if (sample_array.shape == (64, 64) and type in ["MaskCT", "CT"]) or (sample_array.shape == (64, 64, 3) and type in ["LS", "HS"]):
+            if sample_array.shape == (64, 64):
                 return sample_array
             else:
                 print(f"Dimensions invalides dans {sample_path}: {sample_array.shape}")
