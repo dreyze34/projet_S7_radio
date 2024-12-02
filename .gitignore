@@ -4,4 +4,4 @@ Data/
 ApplicationsUNet/UNet LS-HS/models
 ApplicationsUNet/UNet LS+CT-HS/models
 images
-ApplicationsUNet\UNet CT-Mask\models
+ApplicationsUNet/UNet CT-Mask/models
