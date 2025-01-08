@@ -4,7 +4,6 @@ from skimage import io
 from matplotlib.colors import ListedColormap
 import matplotlib.cm as cm
 from matplotlib.colors import Normalize
-import torch
 
 class ThoraxDataLoader:
     """
