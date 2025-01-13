@@ -4,7 +4,6 @@ from skimage import io
 from matplotlib.colors import ListedColormap
 import matplotlib.cm as cm
 from matplotlib.colors import Normalize
-import torch
 
 class ThoraxDataLoader:
     """
@@ -55,6 +54,15 @@ class ThoraxDataLoader:
 
         print(f"Total {len(all_samples)} échantillons chargés.")
         return self.data
+
+    def load_sample(self, sample_dir: str, type) -> np.ndarray:
+        """
+        Charge un seul échantillon à partir d'un répertoire donné.
+        
+        :param sample_dir: Chemin du répertoire de l'échantillon.
+        :return: Tableau numpy 2D (64, 64) représentant l'échantillon.
+        """
+        return self._load_sample(sample_dir, type)
 
     def _load_sample(self, sample_path: str, type) -> np.ndarray:
         """
