@@ -5,4 +5,4 @@ ApplicationsUNet/UNet LS-HS/models
 ApplicationsUNet/UNet LS+CT-HS/models
 images
 ApplicationsUNet/UNet CT-Mask/models
-Segmentation\segmentation.npy
+Segmentation/segmentation.npy
