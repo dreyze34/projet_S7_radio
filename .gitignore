@@ -10,3 +10,5 @@ ApplicationsUNet/UNet CT-Mask/models
 Segmentation/models
 
 Segmentation/outputs
+
+ApplicationsUNet/__pycache__
