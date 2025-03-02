@@ -11,3 +11,7 @@ Améliorer la précision de la dosimétrie en radiothérapie.
 Réduire le temps de calcul des simulations basées sur Monte Carlo.
 
 Exploiter les capacités des réseaux de neurones convolutifs (U-Net) et des Transformers pour modéliser la distribution des doses.
+
+📊 Résultats
+
+Les résultats obtenus sont disponibles dans Rapport du projet.pdf
